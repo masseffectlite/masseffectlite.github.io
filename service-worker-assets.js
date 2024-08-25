@@ -61,7 +61,7 @@
       "url": "_framework\/icudt_no_CJK.dat.br"
     },
     {
-      "hash": "sha256-uStNQpuYqq58Js3QtToRSL7Eo2wju2zKSKuVQi3sun4=",
+      "hash": "sha256-BHU4IyykNexQMeA7fdM+zbknGhM39Tqp9VE1KU1z68k=",
       "url": "_framework\/blazor.boot.json.br"
     },
     {
@@ -73,7 +73,7 @@
       "url": "_framework\/dotnet.native.wasm.br"
     },
     {
-      "hash": "sha256-G+ZbFLgMhoDT7PYgH9bVzZ94TydWCK1ObQaeYkOKTPw=",
+      "hash": "sha256-jDorSyGUNIN4qBQaWTuXmqmrx+BTvYqDY57NkFd9lSA=",
       "url": "_framework\/MELWebsite.wasm.br"
     },
     {
@@ -141,7 +141,7 @@
       "url": "_framework\/Microsoft.JSInterop.WebAssembly.wasm.br"
     },
     {
-      "hash": "sha256-q7uwJDA0zstKOXbf4j2qGuoQ+PX9CjYFIgSnLlywOLo=",
+      "hash": "sha256-McG8hPXlga8qNTJa+wexa51dGrhaNi7zkmFYYs8QJvE=",
       "url": "_framework\/MudBlazor.wasm.br"
     },
     {
@@ -241,5 +241,5 @@
       "url": "brotliloader.min.js"
     }
   ],
-  "version": "6EU5LsX0"
+  "version": "wDnSJReZ"
 };
