@@ -13,7 +13,11 @@
       "url": "css\/bootstrap\/bootstrap.min.css.map"
     },
     {
-      "hash": "sha256-4mWsDy3aHl36ZbGt8zByK7Pvd4kRUoNgTYzRnwmPHwg=",
+      "hash": "sha256-HiJhTknR7aIwG9BXBilJxJ0K9llJpbjRfh+rawWLHYo=",
+      "url": "favicon.ico"
+    },
+    {
+      "hash": "sha256-HCSaOymjVnMGd8C0VVzwEDuD\/+Ltr9q2jVL2YZysOZM=",
       "url": "favicon.png"
     },
     {
@@ -65,7 +69,7 @@
       "url": "_framework\/icudt_no_CJK.dat.br"
     },
     {
-      "hash": "sha256-kIkQ5FaQ2F++sjp+2ugZNtJVtdAOT6Ereh4+P3swVhY=",
+      "hash": "sha256-Fad7nIwNqhRV9Gg3Re0seM2jjj+Gw40ro+mMHkgSptM=",
       "url": "_framework\/blazor.boot.json.br"
     },
     {
@@ -77,7 +81,7 @@
       "url": "_framework\/dotnet.native.wasm.br"
     },
     {
-      "hash": "sha256-bcrOATd7ppprADPUqBU8IBmv6GhrHIZYnrSKrG5jdZs=",
+      "hash": "sha256-eJy5FakAXvPJPluE7o9GRm7ZQDn2VdSKgWYbxHJho6s=",
       "url": "_framework\/MELWebsite.wasm.br"
     },
     {
@@ -145,7 +149,7 @@
       "url": "_framework\/Microsoft.JSInterop.WebAssembly.wasm.br"
     },
     {
-      "hash": "sha256-McG8hPXlga8qNTJa+wexa51dGrhaNi7zkmFYYs8QJvE=",
+      "hash": "sha256-WRJ8twSV9L1Vjk1fRDdEk2g2NZ4DnNHuZXEwZcOuN4E=",
       "url": "_framework\/MudBlazor.wasm.br"
     },
     {
@@ -245,5 +249,5 @@
       "url": "brotliloader.min.js"
     }
   ],
-  "version": "GB8Vi3aE"
+  "version": "502AFHG\/"
 };
