@@ -117,9 +117,10 @@ namespace MELWebsite.Constants
                 Secondary = "#f9d77c",
                 TextSecondary = "#ca5a05",
                 SecondaryContrastText = "#ca5a05",
-                AppbarBackground = "#bc4c4c",
+                AppbarBackground = "#000",
+                AppbarText = "#fff",
                 Background = Colors.Gray.Lighten5,
-                DrawerBackground = "#fff",
+                DrawerBackground = "#fff",   
                 DrawerText = "rgba(0,0,0, 0.7)",
                 Success = "#007E33"
             },
