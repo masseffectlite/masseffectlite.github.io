@@ -17,6 +17,10 @@
       "url": "favicon.png"
     },
     {
+      "hash": "sha256-npxuNaDJu++j78Bd6+bWkUHBxT7TLapR1Cxok\/fgebc=",
+      "url": "fonts\/me123.woff"
+    },
+    {
       "hash": "sha256-DbpQaq68ZSb5IoPosBErM1QWBfsbTxpJqhU0REi6wP4=",
       "url": "icon-192.png"
     },
@@ -25,7 +29,7 @@
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-qo2L+5+TqHw\/\/accLruYPGnMm5Czlm+cctSmi8iMkFI=",
+      "hash": "sha256-eeFqoK1CWgp5Mds5jcxUzOk9LHeLCWTyciSSQPbrLOI=",
       "url": "index.html"
     },
     {
@@ -61,7 +65,7 @@
       "url": "_framework\/icudt_no_CJK.dat.br"
     },
     {
-      "hash": "sha256-BHU4IyykNexQMeA7fdM+zbknGhM39Tqp9VE1KU1z68k=",
+      "hash": "sha256-V9Z7iBpwTbmmI\/wgEx28pk45foPKC5zYRxRmdSTbUiA=",
       "url": "_framework\/blazor.boot.json.br"
     },
     {
@@ -73,7 +77,7 @@
       "url": "_framework\/dotnet.native.wasm.br"
     },
     {
-      "hash": "sha256-jDorSyGUNIN4qBQaWTuXmqmrx+BTvYqDY57NkFd9lSA=",
+      "hash": "sha256-Bkky+yQ+ZVPUR2D6THaPa78MOcfyG3GtLGG8kdUUT28=",
       "url": "_framework\/MELWebsite.wasm.br"
     },
     {
@@ -241,5 +245,5 @@
       "url": "brotliloader.min.js"
     }
   ],
-  "version": "wDnSJReZ"
+  "version": "nXiiEICn"
 };
