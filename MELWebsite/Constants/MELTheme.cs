@@ -16,7 +16,7 @@ namespace MELWebsite.Constants
             },
             H1 = new H1()
             {
-                FontFamily = new[] { "Roboto", "Montserrat", "Helvetica", "Arial", "sans-serif" },
+                FontFamily = new[] { "ME123", "sans-serif" },
                 FontSize = "6rem",
                 FontWeight = 300,
                 LineHeight = 1.167,
