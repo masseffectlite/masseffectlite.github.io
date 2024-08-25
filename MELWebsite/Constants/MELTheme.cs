@@ -120,8 +120,8 @@ namespace MELWebsite.Constants
                 AppbarBackground = "#000",
                 AppbarText = "#fff",
                 Background = Colors.Gray.Lighten5,
-                DrawerBackground = "#fff",   
-                DrawerText = "rgba(0,0,0, 0.7)",
+                DrawerBackground = "#c80100",   
+                DrawerText = "#fff",
                 Success = "#007E33"
             },
             Typography = DefaultTypography,

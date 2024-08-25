@@ -7,14 +7,14 @@
 <MudLayout>
     <MudAppBar Elevation="1">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-        <MudText Typo="Typo.h5" Class="mt-1" Style="font-family: 'ME123'; margin-bottom: 0.3em">Mass Effect Lite</MudText>
+        <MudText Typo="Typo.h5" Style="font-family: 'ME123'">Mass Effect Lite</MudText>
         <MudSpacer />
         <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
     </MudAppBar>
     <MudDrawer @bind-Open="_drawerOpen" Elevation="2">
-        <MudDrawerHeader>
+@*         <MudDrawerHeader>
             <MudText Typo="Typo.body2">Navegación</MudText>
-        </MudDrawerHeader>
+        </MudDrawerHeader> *@
         <NavMenu />
     </MudDrawer>
     <MudMainContent>
