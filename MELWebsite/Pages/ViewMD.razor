@@ -1,0 +1,26 @@
+﻿@page "/view-document/{MDFileUrl}"
+@using MELWebsite.Models
+@using MELWebsite.Services
+@inject IMDFilesServices mdFileServices
+
+@((MarkupString)_content)
+
+@code {
+    [Parameter] public string MDFileUrl { get; set; } = null!;
+
+    public string _content = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var getContent = await mdFileServices.GetHTMLContent(MDFileUrl);
+        if (getContent.IsSuccess)
+        {
+            _content = getContent.ValueOrDefault;
+        }
+    }
+}

@@ -1,12 +1,33 @@
-﻿<MudNavMenu>
+﻿@using MELWebsite.Models
+@using MELWebsite.Services
+@inject IMDFilesServices mdFileServices
+
+<MudNavMenu>
     <MudNavLink Href="/" Match="NavLinkMatch.All">Dashboard</MudNavLink>
-    <MudNavLink Href="/servers" Match="NavLinkMatch.Prefix">Servers</MudNavLink>
+    @foreach (var document in _index.Documents)
+    {
+        <MudNavLink Href="@($"/view-document/{document.Path}")" Match="NavLinkMatch.All">@document.Title</MudNavLink>
+    }
+    @* <MudNavLink Href="/servers" Match="NavLinkMatch.Prefix">Servers</MudNavLink>
     <MudNavGroup Title="Settings" Expanded="true">
         <MudNavLink Href="/users"  Match="NavLinkMatch.Prefix">Users</MudNavLink>
         <MudNavLink Href="/security"  Match="NavLinkMatch.Prefix">Security</MudNavLink>
     </MudNavGroup>
-    <MudNavLink Href="/about"  Match="NavLinkMatch.Prefix">About</MudNavLink>
+    <MudNavLink Href="/about"  Match="NavLinkMatch.Prefix">About</MudNavLink> *@
 </MudNavMenu>
+
+@code {
+    private MDIndex _index = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var getIndex = await mdFileServices.GetIndex();
+        if (getIndex.IsSuccess)
+        {
+            _index = getIndex.ValueOrDefault;
+        }
+    }
+}
 
 @* div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
