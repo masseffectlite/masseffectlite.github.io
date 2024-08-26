@@ -1,0 +1,234 @@
+﻿@using Markdig
+@using Markdig.Extensions.Tables
+@using Markdig.Syntax
+@using Markdig.Syntax.Inlines
+@using Microsoft.AspNetCore.Components.Rendering
+@using MudBlazor
+
+@RenderedContent
+
+@code {
+    [Parameter]
+    public string MarkdownContent { get; set; } = string.Empty;
+
+    private RenderFragment? RenderedContent;
+
+    protected override void OnParametersSet()
+    {
+        RenderedContent = ConvertMarkdownToMudBlazor(MarkdownContent);
+    }
+
+    private RenderFragment ConvertMarkdownToMudBlazor(string markdown)
+    {
+        var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+        var document = Markdown.Parse(markdown, pipeline);
+
+        return builder =>
+        {
+            int seq = 0;
+            foreach (var block in document)
+            {
+                switch (block)
+                {
+                    case HeadingBlock headingBlock:
+                        builder.OpenComponent<MudText>(seq++);
+                        builder.AddAttribute(seq++, "Typo", GetHeadingTypo(headingBlock.Level));
+                        builder.AddContent(seq++, GetInlineContent(headingBlock.Inline));
+                        builder.CloseComponent();
+                        break;
+
+                    case ParagraphBlock paragraphBlock:
+                        builder.OpenComponent<MudText>(seq++);
+                        builder.AddContent(seq++, GetInlineContent(paragraphBlock.Inline));
+                        builder.CloseComponent();
+                        break;
+
+                    case ListBlock listBlock:
+                        // Llama a RenderList, pero ahora solo pasa la lista
+                        RenderList(builder, listBlock, ref seq);
+                        break;
+
+                    case QuoteBlock quoteBlock:
+                        builder.OpenComponent<MudPaper>(seq++);
+                        builder.AddAttribute(seq++, "Class", "pa-3");
+                        builder.AddAttribute(seq++, "Elevation", 3);
+
+                        // Iterar sobre los bloques dentro del QuoteBlock
+                        foreach (var innerBlock in quoteBlock)
+                        {
+                            if (innerBlock is ParagraphBlock paragraphBlock)
+                            {
+                                builder.AddContent(seq++, GetInlineContent(paragraphBlock.Inline));
+                            }
+                        }
+
+                        builder.CloseComponent();
+                        break;
+
+                    case FencedCodeBlock codeBlock:
+                        builder.OpenComponent<MudText>(seq++);
+                        builder.AddAttribute(seq++, "Class", "mud-code-block");
+                        builder.AddContent(seq++, codeBlock.Lines.ToString());
+                        builder.CloseComponent();
+                        break;
+
+                    case ThematicBreakBlock _:
+                        builder.OpenComponent<MudDivider>(seq++);
+                        builder.CloseComponent();
+                        break;
+
+                    case HtmlBlock htmlBlock:
+                        builder.OpenElement(seq++, "div");
+                        builder.AddMarkupContent(seq++, htmlBlock.Lines.ToString());
+                        builder.CloseElement();
+                        break;
+
+                    case Table table:
+                        RenderTable(builder, table, ref seq);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        };
+    }
+
+    private void RenderList(RenderTreeBuilder builder, ListBlock listBlock, ref int seq)
+    {
+        // Abrir un componente MudList
+        builder.OpenComponent<MudList<string>>(seq++);
+        builder.AddAttribute(seq++, "Dense", true);
+
+        foreach (var item in listBlock)
+        {
+            if (item is ListItemBlock listItemBlock)
+            {
+                builder.OpenComponent<MudListItem<string>>(seq++);
+                // Aquí iteramos sobre los bloques de contenido del ListItemBlock
+                foreach (var contentBlock in listItemBlock)
+                {
+                    if (contentBlock is ParagraphBlock paragraphBlock)
+                    {
+                        builder.AddContent(seq++, GetInlineContent(paragraphBlock.Inline));
+                    }
+                    else
+                    {
+                        // Manejar otros tipos de bloques dentro de ListItemBlock si es necesario
+                    }
+                }
+                builder.CloseComponent();
+            }
+        }
+
+        builder.CloseComponent();
+    }
+
+
+    private void RenderTable(RenderTreeBuilder builder, Table table, ref int seq)
+    {
+        // Abrir el componente MudSimpleTable
+        builder.OpenComponent<MudSimpleTable>(seq++);
+
+        // // Añadir encabezado (si la tabla tiene encabezados)
+        // if (table.Any())
+        // {
+        //     builder.OpenElement(seq++, "thead");
+        //     builder.OpenElement(seq++, "tr");
+
+        //     // Obtener la primera fila para el encabezado
+        //     var headerRow = table.FirstOrDefault();
+        //     if (headerRow != null)
+        //     {
+        //         foreach (var cell in headerRow)
+        //         {
+        //             builder.OpenElement(seq++, "th");
+        //             builder.AddContent(seq++, GetInlineContent(cell));
+        //             builder.CloseElement();
+        //         }
+        //     }
+
+        //     builder.CloseElement(); // Cierre de la fila de encabezado
+        //     builder.CloseElement(); // Cierre del thead
+        // }
+
+        // // Añadir cuerpo de la tabla
+        // builder.OpenElement(seq++, "tbody");
+
+        // // Iterar sobre las filas restantes de la tabla
+        // foreach (var row in table.Skip(1)) // Saltar la primera fila que es el encabezado
+        // {
+        //     builder.OpenElement(seq++, "tr");
+        //     foreach (var cell in row)
+        //     {
+        //         builder.OpenElement(seq++, "td");
+        //         builder.AddContent(seq++, GetInlineContent(cell));
+        //         builder.CloseElement();
+        //     }
+        //     builder.CloseElement();
+        // }
+
+        builder.CloseElement(); // Cierre del tbody
+        builder.CloseComponent(); // Cierre de MudSimpleTable
+    }
+
+
+    private Typo GetHeadingTypo(int level) => level switch
+    {
+        1 => Typo.h1,
+        2 => Typo.h2,
+        3 => Typo.h3,
+        4 => Typo.h4,
+        5 => Typo.h5,
+        6 => Typo.h6,
+        _ => Typo.body1,
+    };
+
+    private RenderFragment GetInlineContent(ContainerInline inline) => builder =>
+    {
+        int seq = 0;
+        foreach (var item in inline)
+        {
+            switch (item)
+            {
+                case LiteralInline literalInline:
+                    builder.AddContent(seq++, literalInline.Content.Text);
+                    break;
+
+                case EmphasisInline emphasisInline:
+                    builder.OpenComponent<MudText>(seq++);
+                    builder.AddAttribute(seq++, "Style", emphasisInline.IsDouble ? "font-weight: bold;" : "font-style: italic;");
+                    builder.AddContent(seq++, GetInlineContent(emphasisInline));
+                    builder.CloseComponent();
+                    break;
+
+                case LinkInline linkInline:
+                    if (linkInline.IsImage)
+                    {
+                        builder.OpenComponent<MudImage>(seq++);
+                        builder.AddAttribute(seq++, "Src", linkInline.Url);
+                        builder.AddAttribute(seq++, "Alt", GetInlineContent(linkInline));
+                        builder.CloseComponent();
+                    }
+                    else
+                    {
+                        builder.OpenComponent<MudLink>(seq++);
+                        builder.AddAttribute(seq++, "Href", linkInline.Url);
+                        builder.AddContent(seq++, GetInlineContent(linkInline));
+                        builder.CloseComponent();
+                    }
+                    break;
+
+                case CodeInline codeInline:
+                    builder.OpenComponent<MudText>(seq++);
+                    builder.AddAttribute(seq++, "Class", "mud-code-inline");
+                    builder.AddContent(seq++, codeInline.Content);
+                    builder.CloseComponent();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    };
+}

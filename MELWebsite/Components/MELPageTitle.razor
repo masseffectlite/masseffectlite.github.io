@@ -1,0 +1,7 @@
+﻿@using MELWebsite.Constants
+<PageTitle>@Texts.WebsiteName - @ChildContent</PageTitle>
+<h1 class="mb-4">@ChildContent</h1>
+
+@code {
+    [Parameter] public RenderFragment ChildContent { get; set; } = null!;
+}

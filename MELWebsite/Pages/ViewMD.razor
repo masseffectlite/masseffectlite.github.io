@@ -1,14 +1,18 @@
 ﻿@page "/view-document/{MDFileUrl}"
+@using HtmlAgilityPack
 @using MELWebsite.Models
 @using MELWebsite.Services
 @inject IMDFilesServices mdFileServices
+
+<MELPageTitle>@_title</MELPageTitle>
 
 @((MarkupString)_content)
 
 @code {
     [Parameter] public string MDFileUrl { get; set; } = null!;
 
-    public string _content = string.Empty;
+    private string _content = string.Empty;
+    private string _title = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
@@ -21,6 +25,11 @@
         if (getContent.IsSuccess)
         {
             _content = getContent.ValueOrDefault;
+            var document = new HtmlDocument();
+            document.LoadHtml(_content);
+            HtmlNode h1Node = document.DocumentNode.SelectSingleNode("//h1");
+            _title = h1Node.InnerText;
+            _content = _content.Replace(h1Node.OuterHtml, "");
         }
     }
 }

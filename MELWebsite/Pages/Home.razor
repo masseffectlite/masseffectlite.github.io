@@ -1,7 +1,11 @@
 ﻿@page "/"
+@inject NavigationManager NavigationManager
+<MELPageTitle>Introducción</MELPageTitle>
 
-<PageTitle>Inicio</PageTitle>
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        NavigationManager.NavigateTo("/view-document/introduction.md");
+    }
+}
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app.

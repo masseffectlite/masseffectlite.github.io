@@ -5,6 +5,10 @@
       "Path": "introduction.md"
     },
     {
+      "Title": "Contenido",
+      "Path": "main.md"
+    },
+    {
       "Title": "Créditos",
       "Path": "credits.md"
     }

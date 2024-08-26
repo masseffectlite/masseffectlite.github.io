@@ -2,7 +2,7 @@
 @using MELWebsite.Services
 @inject IMDFilesServices mdFileServices
 
-<MudNavMenu>
+<MudNavMenu Color="Color.Surface">
     <MudNavLink Href="/" Match="NavLinkMatch.All">Dashboard</MudNavLink>
     @foreach (var document in _index.Documents)
     {
