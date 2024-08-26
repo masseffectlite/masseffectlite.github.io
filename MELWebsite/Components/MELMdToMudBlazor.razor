@@ -130,47 +130,69 @@
         // Abrir el componente MudSimpleTable
         builder.OpenComponent<MudSimpleTable>(seq++);
 
-        // // Añadir encabezado (si la tabla tiene encabezados)
-        // if (table.Any())
-        // {
-        //     builder.OpenElement(seq++, "thead");
-        //     builder.OpenElement(seq++, "tr");
+        // Encabezado de la tabla
+        if (table.Any())
+        {
+            builder.OpenElement(seq++, "thead");
+            builder.OpenElement(seq++, "tr");
 
-        //     // Obtener la primera fila para el encabezado
-        //     var headerRow = table.FirstOrDefault();
-        //     if (headerRow != null)
-        //     {
-        //         foreach (var cell in headerRow)
-        //         {
-        //             builder.OpenElement(seq++, "th");
-        //             builder.AddContent(seq++, GetInlineContent(cell));
-        //             builder.CloseElement();
-        //         }
-        //     }
+            // Obtener la primera fila de la tabla como encabezado
+            var headerRow = table.FirstOrDefault() as TableRow;
+            if (headerRow != null)
+            {
+                foreach (var cell in headerRow.OfType<TableCell>())
+                {
+                    builder.OpenElement(seq++, "th");
+                    // Procesar el contenido del TableCell
+                    foreach (var block in cell)
+                    {
+                        builder.AddContent(seq++, GetBlockContent(block));
+                    }
+                    builder.CloseElement();
+                }
+            }
 
-        //     builder.CloseElement(); // Cierre de la fila de encabezado
-        //     builder.CloseElement(); // Cierre del thead
-        // }
+            builder.CloseElement(); // Cierre de la fila de encabezado
+            builder.CloseElement(); // Cierre del thead
+        }
 
-        // // Añadir cuerpo de la tabla
-        // builder.OpenElement(seq++, "tbody");
+        // Cuerpo de la tabla
+        builder.OpenElement(seq++, "tbody");
 
-        // // Iterar sobre las filas restantes de la tabla
-        // foreach (var row in table.Skip(1)) // Saltar la primera fila que es el encabezado
-        // {
-        //     builder.OpenElement(seq++, "tr");
-        //     foreach (var cell in row)
-        //     {
-        //         builder.OpenElement(seq++, "td");
-        //         builder.AddContent(seq++, GetInlineContent(cell));
-        //         builder.CloseElement();
-        //     }
-        //     builder.CloseElement();
-        // }
+        // Iterar sobre las filas restantes de la tabla
+        foreach (var row in table.Skip(1)) // Saltar la primera fila que es el encabezado
+        {
+            if (row is TableRow tableRow)
+            {
+                builder.OpenElement(seq++, "tr");
+                foreach (var cell in tableRow.OfType<TableCell>())
+                {
+                    builder.OpenElement(seq++, "td");
+                    // Procesar el contenido del TableCell
+                    foreach (var block in cell)
+                    {
+                        builder.AddContent(seq++, GetBlockContent(block));
+                    }
+                    builder.CloseElement();
+                }
+                builder.CloseElement();
+            }
+        }
 
         builder.CloseElement(); // Cierre del tbody
         builder.CloseComponent(); // Cierre de MudSimpleTable
     }
+
+    // Método para procesar el contenido de un bloque
+    private RenderFragment GetBlockContent(Markdig.Syntax.Block block) => builder =>
+    {
+        int seq = 0;
+        if (block is ParagraphBlock paragraphBlock)
+        {
+            builder.AddContent(seq++, GetInlineContent(paragraphBlock.Inline));
+        }
+        // Manejar otros tipos de bloques si es necesario
+    };
 
 
     private Typo GetHeadingTypo(int level) => level switch
