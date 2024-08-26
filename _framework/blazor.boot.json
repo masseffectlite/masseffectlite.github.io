@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "MELWebsite",
   "resources": {
-    "hash": "sha256-oU3Ogv91jWWiaiKLSfcHfrK4OEqueAJfFAdDPEdY1mo=",
+    "hash": "sha256-xNeM7PYPPOIozwjIy84DaiOTgyvgN9v3/pD5/nWD6ao=",
     "jsModuleNative": {
       "dotnet.native.8.0.8.fo8gkt23le.js": "sha256-h6pOQtNRJPSlT8iMadrMHXoMEhldZgkg20mYmwVaSjI="
     },
@@ -20,7 +20,7 @@
       "FluentResults.wasm": "sha256-DehpuVkMHWR0LJWsjczt30pKYexic13RqF2qBX4z9+U=",
       "HtmlAgilityPack.wasm": "sha256-KbYWtCiRjvsKEXZZoc3olh3V6GlxnagI67SOneAWtWw=",
       "Markdig.wasm": "sha256-Jv9S5coLP28fMUd+sd72uOfd5e3pWx+IFMRNtR/lykc=",
-      "MELWebsite.wasm": "sha256-FQt/n4v29mZKcH0h8tz/7YR7CQox697Htp2wbJP6Rbg=",
+      "MELWebsite.wasm": "sha256-6C0wZX/tknIKmO1TxgJb0/H8Z0CA9B75E83EtmpgXu4=",
       "Microsoft.AspNetCore.Components.Forms.wasm": "sha256-un0mWHcNYsRjdRZz/RwoEXZ36QV3diPGsr1753foDzQ=",
       "Microsoft.AspNetCore.Components.wasm": "sha256-SMhtsVwE9e75Xgyu3MO0DTw1NPjYO6vZ+KIdK15yWFY=",
       "Microsoft.AspNetCore.Components.Web.wasm": "sha256-SYARg2pDFH0tGC+Q+NalKlL45h/ETHY5RCB6SY+lhk0=",
